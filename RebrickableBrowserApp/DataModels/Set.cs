@@ -26,9 +26,9 @@ public partial class Set
     [JsonPropertyName("set_img_url")]
     public string SetImgUrl { get; set; }
 
-    [JsonPropertyName("set_url")]
-    public string SetUrl { get; set; }
+    //[JsonPropertyName("set_url")]
+    //public string SetUrl { get; set; }
 
-    [JsonPropertyName("last_modified_dt")]
-    public DateTime LastModifiedDt { get; set; }
+    //[JsonPropertyName("last_modified_dt")]
+    //public DateTime LastModifiedDt { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Uno.Sdk">
+<Project Sdk="Uno.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst;net8.0-windows10.0.26100;net8.0-browserwasm;net8.0-desktop</TargetFrameworks>
 
@@ -33,10 +33,30 @@
       https://aka.platform.uno/singleproject-features
     -->
     <UnoFeatures>
+      Hosting;
+      Navigation;
     </UnoFeatures>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Json" />
+    <PackageReference Include="Uno.Extensions.Hosting" />
+    <PackageReference Include="Uno.Extensions.Navigation" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Material" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="SetDetailsPage.xaml.cs">
+      <DependentUpon>SetDetailsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="BlankPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="SetDetailsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

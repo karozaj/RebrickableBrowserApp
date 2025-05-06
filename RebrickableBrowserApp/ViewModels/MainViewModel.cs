@@ -13,7 +13,7 @@ public class MainViewModel : DispatchedBindableBase
     // Insert member variables below here
     private bool _isBusy;
     private string _searchTerm = string.Empty;
-    private ObservableCollection<Set> _searchResults = new ObservableCollection<Set>();
+    private static ObservableCollection<Set> _searchResults = new ObservableCollection<Set>();
     private SetSearchApi _setSearchApi = new SetSearchApi();
     // Insert properties below here
     public bool IsBusy
@@ -54,5 +54,6 @@ public class MainViewModel : DispatchedBindableBase
             }
         }
     }
+
         
 }

@@ -1,5 +1,8 @@
+using System.Collections.ObjectModel;
 using Microsoft.UI.Xaml.Media.Imaging;
-
+using RebrickableBrowserApp.DataModels;
+using RebrickableBrowserApp.ViewModels;
+using Uno.Extensions.Navigation;
 namespace RebrickableBrowserApp;
 
 public sealed partial class MainPage : Page
@@ -22,13 +25,23 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private void SearchResults_ItemClick(object sender, ItemClickEventArgs e)
-    {
-
-    }
-
     private void Image_ImageFailed(object sender, ExceptionRoutedEventArgs e)
     {
         ((Image)sender).Source = new BitmapImage(new Uri("/Assets/default.png", UriKind.Relative));
     }
+
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        Button button = sender as Button;
+        if (button != null)
+        {
+            Set set = button.DataContext as Set;
+            if(set!=null)
+            {
+                SetDetailsViewModel.currentSet = set;
+                Frame.Navigate(typeof(SetDetailsPage), set);
+            }
+        }
+    }
+
 }
