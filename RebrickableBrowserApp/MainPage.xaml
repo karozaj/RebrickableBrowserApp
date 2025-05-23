@@ -32,6 +32,7 @@
             <!-- ROW 1 - Search Box -->
             <AutoSuggestBox Grid.Row="1" PlaceholderText="Search for sets" QueryIcon="Find"
                             Name="SetSearchBox"
+                            Background="White"
                             Width="300" Margin="4,20" HorizontalAlignment="Left"
                             Text="{x:Bind ViewModel.SearchTerm, Mode=TwoWay}"
                             QuerySubmitted="SetSearchBox_QuerySubmitted"

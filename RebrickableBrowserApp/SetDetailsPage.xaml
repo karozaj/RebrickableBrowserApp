@@ -91,7 +91,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" Text="Parts list:" Style="{StaticResource Header2}" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0"  Text="{Binding HeaderText}" Style="{StaticResource Header2}" HorizontalAlignment="Center"/>
 
             <Button Click="Button_Click"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
                     Content="Get parts list"></Button>

@@ -18,6 +18,7 @@ internal class SetDetailsViewModel : DispatchedBindableBase
     private int _year=0;
     private int _numParts=0;
     private string _setImgUrl = String.Empty;
+    private string _headerText = "Parts list:";
     private  SetPartsSearchApi _searchApi=new SetPartsSearchApi();
 
     public static Set currentSet;
@@ -32,6 +33,13 @@ internal class SetDetailsViewModel : DispatchedBindableBase
         get => _partsList;
         set => SetProperty(ref _partsList, value);
     }
+
+    public string HeaderText
+    {
+        get => _headerText;
+        set => SetProperty(ref _headerText, value);
+    }
+
     public string SetNumber
     {
         get => _setNumber;
@@ -85,6 +93,7 @@ internal class SetDetailsViewModel : DispatchedBindableBase
 
     public async Task SearchForParts()
     {
+        PartsList.Clear();
         if (!string.IsNullOrWhiteSpace(SetNumber))
         {
             try
@@ -94,6 +103,10 @@ internal class SetDetailsViewModel : DispatchedBindableBase
                 if (result.Any())
                 {
                     PartsList = new ObservableCollection<SetPart>(result);
+                }
+                else
+                {
+                    HeaderText = "No parts detected!";
                 }
             }
             finally
