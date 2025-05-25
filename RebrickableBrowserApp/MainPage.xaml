@@ -34,12 +34,10 @@
                             Name="SetSearchBox"
                             Width="300" Margin="4,20" HorizontalAlignment="Center"
                             Text="{x:Bind ViewModel.SearchTerm, Mode=TwoWay}"
-                            QuerySubmitted="SetSearchBox_QuerySubmitted">
-                <AutoSuggestBox.Resources>
-                <!-- Ustaw kolor dla PlaceholderText -->
-                <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="Gray"/>
-                <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="DarkGray"/>
-                </AutoSuggestBox.Resources>
+                            QuerySubmitted="SetSearchBox_QuerySubmitted"
+                            Foreground="White"
+                            Background="Transparent"
+                            >
             </AutoSuggestBox>
 
             <!-- ROW 2 - Search Results -->
@@ -49,7 +47,7 @@
                 IsItemClickEnabled="True"
                 ScrollViewer.VerticalScrollMode="Enabled"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                HorizontalAlignment ="Center">
+                HorizontalAlignment ="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="datamodels:Set" >
                         <StackPanel Orientation="Horizontal">

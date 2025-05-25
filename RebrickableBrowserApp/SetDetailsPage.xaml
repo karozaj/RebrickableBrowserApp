@@ -102,7 +102,7 @@
                 Visibility="Collapsed"
                 ScrollViewer.VerticalScrollMode="Enabled"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                HorizontalAlignment="Center">
+                HorizontalAlignment="Stretch">
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="datamodels:SetPart" >
