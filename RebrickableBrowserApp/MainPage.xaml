@@ -7,6 +7,7 @@
         xmlns:viewmodels="using:RebrickableBrowserApp.ViewModels"
         xmlns:datamodels="using:RebrickableBrowserApp.DataModels"
         xmlns:toolkit="using:Uno.UI.Toolkit"
+      xmlns:utu="using:Uno.Toolkit.UI"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Page.DataContext>
@@ -18,35 +19,44 @@
     <Grid toolkit:VisibleBoundsPadding.PaddingMask="All">
         <Grid Padding="12">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.9*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <!-- ROW 0 - Search Box -->
-            <AutoSuggestBox Grid.Row="0" PlaceholderText="Search for sets" QueryIcon="Find"
+            <!-- ROW 0 - Navigation -->
+            <utu:NavigationBar Grid.Row="0" Content="Set search" HorizontalContentAlignment="Center">
+
+            </utu:NavigationBar>
+            
+            <!-- ROW 1 - Search Box -->
+            <AutoSuggestBox Grid.Row="1" PlaceholderText="Search for sets" QueryIcon="Find"
                             Name="SetSearchBox"
-                            Width="300" Margin="4,20" HorizontalAlignment="Left"
+                            Width="300" Margin="4,20" HorizontalAlignment="Center"
                             Text="{x:Bind ViewModel.SearchTerm, Mode=TwoWay}"
                             QuerySubmitted="SetSearchBox_QuerySubmitted"
-                            />
+                            Foreground="White"
+                            Background="Transparent"
+                            >
+            </AutoSuggestBox>
 
-            <!-- ROW 1 - Search Results -->
+            <!-- ROW 2 - Search Results -->
 
-            <ListView Grid.Row="1" ItemsSource="{x:Bind ViewModel.SearchResults, Mode=OneWay}" Margin="4"
+            <ListView Grid.Row="2" ItemsSource="{x:Bind ViewModel.SearchResults, Mode=OneWay}" Margin="4"
                 SelectionMode="None"
                 IsItemClickEnabled="True"
-                ItemClick="SearchResults_ItemClick"
                 ScrollViewer.VerticalScrollMode="Enabled"
                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                >
+                HorizontalAlignment ="Stretch">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="datamodels:Set">
+                    <DataTemplate x:DataType="datamodels:Set" >
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding SetImgUrl, TargetNullValue='ms-appx:///Assets/default.png'}" Height="100" Width="100" Stretch="Uniform"/>
                             <StackPanel Padding="4">
                                 <TextBlock Text="{x:Bind Name}" Style="{StaticResource TitleTextBlockStyle}"/>
                                 <TextBlock Text="{x:Bind Year}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="WrapWholeWords"
-                            Height="70" TextTrimming="CharacterEllipsis"/>
+                            TextTrimming="CharacterEllipsis"/>
+                                <Button Click="Button_Click" Content="Details"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>

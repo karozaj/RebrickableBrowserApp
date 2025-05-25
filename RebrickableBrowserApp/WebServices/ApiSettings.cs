@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RebrickableBrowserApp.WebServices;
 public class ApiSettings
 {
-    public static string ApiKey="";
+    public static string ApiKey= "";
     public static Dictionary<string,string> GetDefaultHeaders()
     {
         return new Dictionary<string, string>

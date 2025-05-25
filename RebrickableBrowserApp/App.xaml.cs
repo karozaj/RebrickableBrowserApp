@@ -1,10 +1,12 @@
 using System;
 using Microsoft.Extensions.Logging;
 using Uno.Resizetizer;
+using Microsoft.Extensions.Hosting;
 
 namespace RebrickableBrowserApp;
 public partial class App : Application
 {
+    private IHost Host { get; set; }
     /// <summary>
     /// Initializes the singleton application object. This is the first line of authored code
     /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -26,7 +28,22 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        MainWindow = new Window();
+        var appBuilder = this.CreateBuilder(args)
+        .Configure(host => {
+            // Configure the host builder
+        });
+
+        Host = appBuilder.Build();
+
+        var builder = this.CreateBuilder(args)
+            .Configure(host => host
+                // Configure the host builder
+                .UseNavigation()
+            );
+
+
+        MainWindow = builder.Window;
+       // MainWindow = new Window();
 #if DEBUG
         MainWindow.UseStudio();
 #endif
@@ -134,4 +151,5 @@ public partial class App : Application
 #endif
 #endif
     }
+
 }
