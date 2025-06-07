@@ -22,11 +22,21 @@ public sealed partial class SetDetailsPage : Page
         base.OnNavigatedTo(e);
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void PartsSearchButtonClick(object sender, RoutedEventArgs e)
     {
-        Button button = sender as Button;
-        button.Visibility = Visibility.Collapsed;
+        PartsSearchButton.Visibility=Visibility.Collapsed;
+        MinifiguresSearchButton.Visibility = Visibility.Visible;
+        MinifiguresListView.Visibility = Visibility.Collapsed;
         SetDetailsVM.SearchForParts();
         PartsListView.Visibility = Visibility.Visible;
+    }
+
+    private void MinifiguresSearchButtonClick(object sender, RoutedEventArgs e)
+    {
+        MinifiguresSearchButton.Visibility = Visibility.Collapsed;
+        PartsSearchButton.Visibility = Visibility.Visible;
+        PartsListView.Visibility = Visibility.Collapsed;
+        SetDetailsVM.SearchForMinifigures();
+        MinifiguresListView.Visibility = Visibility.Visible;
     }
 }

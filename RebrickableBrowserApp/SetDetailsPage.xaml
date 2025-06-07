@@ -91,10 +91,25 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0"  Text="{Binding HeaderText}" Style="{StaticResource Header2}" HorizontalAlignment="Center"/>
+            <!-- <TextBlock Grid.Row="0"  Text="{Binding HeaderText}" Style="{StaticResource Header2}" HorizontalAlignment="Center"/> -->
 
-            <Button Click="Button_Click"  Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Content="Get parts list"></Button>
+            <Grid Grid.Row="0" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button x:Name="PartsSearchButton" Click="PartsSearchButtonClick"  Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="Show parts list"></Button>
+                
+                <Button x:Name="MinifiguresSearchButton" Click="MinifiguresSearchButtonClick"  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Content="Show minifigure list"></Button>
+                
+            </Grid>
+
+
+
+            <TextBlock Grid.Row="1"  Text="{Binding HeaderText}" Style="{StaticResource Header2}" HorizontalAlignment="Center"/>
 
             <ListView x:Name="PartsListView" Grid.Row="1" Margin="4" ItemsSource="{x:Bind SetDetailsVM.PartsList, Mode=OneWay}"
                 SelectionMode="None"
@@ -115,6 +130,32 @@
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Quantity: " Style="{StaticResource BodyTextBlockStyle}"/>
                                     <TextBlock Text="{x:Bind quantity}" Style="{StaticResource BodyTextBlockStyle}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <ListView x:Name="MinifiguresListView" Grid.Row="1" Margin="4" ItemsSource="{x:Bind SetDetailsVM.MinifiguresList, Mode=OneWay}"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                Visibility="Collapsed"
+                ScrollViewer.VerticalScrollMode="Enabled"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                HorizontalAlignment="Stretch">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="datamodels:Minifigure" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{Binding SetImgUrl, TargetNullValue='ms-appx:///Assets/default.png'}" Height="100" Width="100" Stretch="Uniform"/>
+                            <StackPanel Padding="4">
+                                <TextBlock Text="{x:Bind SetName}" Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{x:Bind SetNumber}" Style="{StaticResource BodyTextBlockStyle}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Quantity: " Style="{StaticResource BodyTextBlockStyle}"/>
+                                    <TextBlock Text="{x:Bind Quantity}" Style="{StaticResource BodyTextBlockStyle}"/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

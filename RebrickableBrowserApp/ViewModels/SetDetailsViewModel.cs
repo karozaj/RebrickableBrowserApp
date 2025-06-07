@@ -13,13 +13,16 @@ internal class SetDetailsViewModel : DispatchedBindableBase
 {
     private bool _isBusy;
     private static ObservableCollection<SetPart> _partsList = new ObservableCollection<SetPart>();
+    private static ObservableCollection<Minifigure> _minifiguresList = new ObservableCollection<Minifigure>();
+
     private string _setNumber=String.Empty;
     private string _name = String.Empty;
     private int _year=0;
     private int _numParts=0;
     private string _setImgUrl = String.Empty;
-    private string _headerText = "Parts list:";
+    private string _headerText = "";
     private  SetPartsSearchApi _searchApi=new SetPartsSearchApi();
+    private SetMinifiguresSearchApi _minifigSearchApi = new SetMinifiguresSearchApi();
 
     public static Set currentSet;
     public bool IsBusy
@@ -33,7 +36,11 @@ internal class SetDetailsViewModel : DispatchedBindableBase
         get => _partsList;
         set => SetProperty(ref _partsList, value);
     }
-
+    public ObservableCollection<Minifigure> MinifiguresList
+    {
+        get => _minifiguresList;
+        set => SetProperty(ref _minifiguresList, value);
+    }
     public string HeaderText
     {
         get => _headerText;
@@ -93,6 +100,7 @@ internal class SetDetailsViewModel : DispatchedBindableBase
 
     public async Task SearchForParts()
     {
+        HeaderText = "";
         PartsList.Clear();
         if (!string.IsNullOrWhiteSpace(SetNumber))
         {
@@ -107,6 +115,32 @@ internal class SetDetailsViewModel : DispatchedBindableBase
                 else
                 {
                     HeaderText = "No parts detected!";
+                }
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+    }
+
+    public async Task SearchForMinifigures()
+    {
+        HeaderText = "";
+        MinifiguresList.Clear();
+        if (!string.IsNullOrWhiteSpace(SetNumber))
+        {
+            try
+            {
+                IsBusy = true;
+                var result = await _minifigSearchApi.Search(SetNumber).ConfigureAwait(false);
+                if (result.Any())
+                {
+                    MinifiguresList = new ObservableCollection<Minifigure>(result);
+                }
+                else
+                {
+                    HeaderText = "No minifigures detected!";
                 }
             }
             finally
