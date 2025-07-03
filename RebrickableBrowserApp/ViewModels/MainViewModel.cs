@@ -37,8 +37,8 @@ public class MainViewModel : DispatchedBindableBase
     public List<string> SortOptions { get; } = new List<string>
     {
         "Brak",
-        "Nazwa rosnąco",
-        "Nazwa malejąco",
+        "Nazwa a-z",
+        "Nazwa z-a",
         "Części rosnąco",
         "Części malejąco"
     };
