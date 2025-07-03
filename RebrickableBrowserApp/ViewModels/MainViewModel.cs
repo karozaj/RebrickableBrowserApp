@@ -34,6 +34,45 @@ public class MainViewModel : DispatchedBindableBase
         set => SetProperty(ref _searchResults, value);
     }
 
+    public List<string> SortOptions { get; } = new List<string>
+    {
+        "Brak",
+        "Nazwa rosnąco",
+        "Nazwa malejąco",
+        "Części rosnąco",
+        "Części malejąco"
+    };
+
+    private void ApplySorting()
+    {
+        if (SearchResults == null || SearchResults.Count == 0)
+            return;
+
+        IEnumerable<Set> sorted = SelectedSortOption switch
+        {
+            "Nazwa rosnąco" => SearchResults.OrderBy(s => s.Name),
+            "Nazwa malejąco" => SearchResults.OrderByDescending(s => s.Name),
+            "Części rosnąco" => SearchResults.OrderBy(s => s.NumParts),
+            "Części malejąco" => SearchResults.OrderByDescending(s => s.NumParts),
+            _ => SearchResults
+        };
+
+        SearchResults = new ObservableCollection<Set>(sorted);
+    }
+
+    private string _selectedSortOption = "Brak";
+    public string SelectedSortOption
+    {
+        get => _selectedSortOption;
+        set
+        {
+            if (SetProperty(ref _selectedSortOption, value))
+            {
+                ApplySorting();
+            }
+        }
+    }
+
 
     public async Task SearchForSets()
     {
@@ -46,6 +85,7 @@ public class MainViewModel : DispatchedBindableBase
                 if (result.Any())
                 {
                     SearchResults = new ObservableCollection<Set>(result);
+                    ApplySorting();
                 }
             }
             finally
@@ -54,6 +94,8 @@ public class MainViewModel : DispatchedBindableBase
             }
         }
     }
+
+
 
         
 }

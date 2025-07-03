@@ -30,15 +30,22 @@
             </utu:NavigationBar>
             
             <!-- ROW 1 - Search Box -->
-            <AutoSuggestBox Grid.Row="1" PlaceholderText="Search for sets" QueryIcon="Find"
-                            Name="SetSearchBox"
-                            Width="300" Margin="4,20" HorizontalAlignment="Center"
-                            Text="{x:Bind ViewModel.SearchTerm, Mode=TwoWay}"
-                            QuerySubmitted="SetSearchBox_QuerySubmitted"
-                            Foreground="White"
-                            Background="Transparent"
-                            >
-            </AutoSuggestBox>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="4,20" Spacing="12">
+                <!-- Pole wyszukiwania -->
+                <AutoSuggestBox PlaceholderText="Search for sets" QueryIcon="Find"
+                    Name="SetSearchBox"
+                    Width="300"
+                    Text="{x:Bind ViewModel.SearchTerm, Mode=TwoWay}"
+                    QuerySubmitted="SetSearchBox_QuerySubmitted"
+                    Foreground="White"
+                    Background="Transparent" />
+
+                <!-- ComboBox do sortowania -->
+                <ComboBox Width="180"
+              Header="Sortuj według:"
+              SelectedItem="{x:Bind ViewModel.SelectedSortOption, Mode=TwoWay}"
+              ItemsSource="{x:Bind ViewModel.SortOptions, Mode=OneWay}"/>
+            </StackPanel>
 
             <!-- ROW 2 - Search Results -->
 
