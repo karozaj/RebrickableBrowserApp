@@ -50,8 +50,8 @@ public class MainViewModel : DispatchedBindableBase
 
         IEnumerable<Set> sorted = SelectedSortOption switch
         {
-            "Nazwa rosnąco" => SearchResults.OrderBy(s => s.Name),
-            "Nazwa malejąco" => SearchResults.OrderByDescending(s => s.Name),
+            "Nazwa a-z" => SearchResults.OrderBy(s => s.Name),
+            "Nazwa z-a" => SearchResults.OrderByDescending(s => s.Name),
             "Części rosnąco" => SearchResults.OrderBy(s => s.NumParts),
             "Części malejąco" => SearchResults.OrderByDescending(s => s.NumParts),
             _ => SearchResults
